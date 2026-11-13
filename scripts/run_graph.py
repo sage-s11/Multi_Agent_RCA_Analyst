@@ -1,5 +1,7 @@
 import sys
+
 from langgraph.types import Command
+
 from netops_agent.graph import build_graph
 
 ticket_id = sys.argv[1] if len(sys.argv) > 1 else "NET-001"
@@ -9,13 +11,22 @@ config = {"configurable": {"thread_id": ticket_id}}
 result = graph.invoke({"ticket_id": ticket_id}, config)
 
 if "__interrupt__" in result:
-    payload = result["__interrupt__"][0].value
-    print(f"\n--- RCA (Runbook: {payload.get('runbook_used')}) ---")
-    print(f"Likely Cause: {payload.get('likely_cause')}")
+    p = result["__interrupt__"][0].value
+    t = p["ticket"]
+    print(f"\n--- TICKET {t['ticket_id']} ---")
+    print(f"{t['title']}  |  device {t['hostname']}  |  {t['interface']}  |  severity {t['severity']}")
+    print(f"\n--- RCA (runbook: {p['runbook_used']}) ---")
+    print(f"Likely cause: {p['likely_cause']}")
     print("\n--- REMOTE STEPS (NOC) ---")
-    print("\n".join(f"- {s}" for s in payload["remote_steps"]))
-    e = payload["email"]
+    print("\n".join(f"- {s}" for s in p["remote_steps"]))
+    e = p["email"]
     print(f"\n--- DRAFT EMAIL ---\nTo: {e['to']}\nSubject: {e['subject']}\n\n{e['body']}\n")
-    answer = input("approve / reject: ").strip().lower()
+
+    answer = ""
+    while answer not in ("approve", "reject"):
+        answer = input("approve / reject: ").strip().lower()
     graph.invoke(Command(resume={"action": answer}), config)
-    print("Draft saved to drafts/" if answer == "approve" else "Rejected, nothing saved.")
+    if answer == "approve":
+        print(f"Draft saved to drafts/{t['ticket_id']}.txt")
+    else:
+        print("Rejected, nothing saved.")

@@ -46,3 +46,13 @@ class TriageReport(BaseModel):
     site_contact_email: str
     draft_email_subject: str
     draft_email_body: str
+
+class TriageChoice(BaseModel):
+    runbook_used: str
+    likely_cause: str
+
+
+class TicketFields(BaseModel):
+    hostname: str
+    interface: str
+    severity: Literal["low", "medium", "high", "critical"]
