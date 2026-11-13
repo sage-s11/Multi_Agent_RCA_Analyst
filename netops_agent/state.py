@@ -1,6 +1,5 @@
 from typing import TypedDict
 
-
 class AgentState(TypedDict, total=False):
     ticket_id: str
     ticket: dict
@@ -10,3 +9,4 @@ class AgentState(TypedDict, total=False):
     email: dict
     decision: dict
     error: str
+    next_step: str

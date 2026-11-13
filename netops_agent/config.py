@@ -1,15 +1,16 @@
 import os
-from dotenv import load_dotenv
 from pathlib import Path
+from dotenv import load_dotenv
 
 load_dotenv()
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
+RUNBOOKS_DIR = BASE_DIR / "runbooks"
 
 def get_llm(temperature: float = 0):
     provider = os.getenv("LLM_PROVIDER", "gemini")
     model = os.environ["LLM_MODEL"]
-
     if provider == "gemini":
         from langchain_google_genai import ChatGoogleGenerativeAI
         return ChatGoogleGenerativeAI(model=model, temperature=temperature)

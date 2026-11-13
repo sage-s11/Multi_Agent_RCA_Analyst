@@ -1,6 +1,5 @@
-from pydantic import BaseModel, Field
 from typing import Literal
-
+from pydantic import BaseModel, Field
 
 class Ticket(BaseModel):
     ticket_id: str
@@ -11,7 +10,6 @@ class Ticket(BaseModel):
     interface: str
     created_at: str
 
-
 class Device(BaseModel):
     hostname: str
     vendor: str
@@ -19,7 +17,6 @@ class Device(BaseModel):
     role: str
     site_code: str
     mgmt_ip: str
-
 
 class SiteContact(BaseModel):
     site_code: str
@@ -29,6 +26,12 @@ class SiteContact(BaseModel):
     contact_phone: str
     escalation_email: str
 
+class TriageJudgement(BaseModel):
+    diagnosis_category: Literal["physical_layer", "admin_down", "err_disabled", "unknown"]
+    runbook_used: str
+    likely_cause: str
+    remote_steps: list[str] = Field(min_length=1)
+    onsite_steps: list[str] = Field(min_length=1)
 
 class TriageReport(BaseModel):
     ticket_id: str
@@ -43,9 +46,3 @@ class TriageReport(BaseModel):
     site_contact_email: str
     draft_email_subject: str
     draft_email_body: str
-
-class TriageJudgement(BaseModel):
-    diagnosis_category: Literal["physical_layer", "admin_down", "err_disabled", "unknown"]
-    likely_cause: str
-    remote_steps: list[str] = Field(min_length=1)   # NOC does these via CLI
-    onsite_steps: list[str] = Field(min_length=1)   # site contact does these

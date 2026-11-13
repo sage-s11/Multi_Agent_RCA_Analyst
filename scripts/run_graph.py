@@ -1,7 +1,5 @@
 import sys
-
 from langgraph.types import Command
-
 from netops_agent.graph import build_graph
 
 ticket_id = sys.argv[1] if len(sys.argv) > 1 else "NET-001"
@@ -12,6 +10,8 @@ result = graph.invoke({"ticket_id": ticket_id}, config)
 
 if "__interrupt__" in result:
     payload = result["__interrupt__"][0].value
+    print(f"\n--- RCA (Runbook: {payload.get('runbook_used')}) ---")
+    print(f"Likely Cause: {payload.get('likely_cause')}")
     print("\n--- REMOTE STEPS (NOC) ---")
     print("\n".join(f"- {s}" for s in payload["remote_steps"]))
     e = payload["email"]
