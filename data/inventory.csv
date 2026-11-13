@@ -1,0 +1,5 @@
+hostname,vendor,model,role,site_code,mgmt_ip
+SW-BLR-01,Arista,cEOS,access-switch,BLR,10.10.1.11
+SW-BLR-02,Arista,cEOS,access-switch,BLR,10.10.1.12
+RTR-BLR-01,Arista,cEOS,edge-router,BLR,10.10.1.1
+SW-DEL-01,Arista,cEOS,access-switch,DEL,10.20.1.11

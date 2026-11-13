@@ -1,0 +1,9 @@
+{
+  "ticket_id": "NET-002",
+  "title": "Interface Ethernet3 down on SW-XYZ-99",
+  "description": "Alert: Ethernet3 admin up, line protocol down.",
+  "severity": "medium",
+  "hostname": "SW-XYZ-99",
+  "interface": "Ethernet3",
+  "created_at": "2026-11-13T10:00:00Z"
+}

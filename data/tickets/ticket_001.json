@@ -1,0 +1,9 @@
+{
+  "ticket_id": "NET-001",
+  "title": "Interface Ethernet1 down on SW-BLR-01",
+  "description": "Alert: Ethernet1 is administratively up but line protocol is down (notconnect). Uplink to SW-BLR-02 affected.",
+  "severity": "high",
+  "hostname": "SW-BLR-01",
+  "interface": "Ethernet1",
+  "created_at": "2026-11-13T09:30:00Z"
+}
