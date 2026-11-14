@@ -1,0 +1,20 @@
+name: blr
+
+mgmt:
+  network: netops-mgmt
+  ipv4-subnet: 172.31.100.0/24
+
+topology:
+  kinds:
+    nokia_srlinux:
+      image: ghcr.io/nokia/srlinux:latest
+  nodes:
+    sw-blr-01:
+      kind: nokia_srlinux
+      mgmt-ipv4: 172.31.100.11
+    sw-blr-02:
+      kind: nokia_srlinux
+      mgmt-ipv4: 172.31.100.12
+  links:
+    - endpoints: ["sw-blr-01:e1-1", "sw-blr-02:e1-1"]
+    - endpoints: ["sw-blr-01:e1-2", "sw-blr-02:e1-2"]
