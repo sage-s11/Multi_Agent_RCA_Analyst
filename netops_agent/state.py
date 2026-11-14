@@ -5,6 +5,7 @@ class AgentState(TypedDict, total=False):
     ticket: dict
     device: dict
     contact: dict
+    diagnostics: dict
     judgement: dict
     email: dict
     decision: dict

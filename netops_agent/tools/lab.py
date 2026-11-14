@@ -5,7 +5,7 @@ import subprocess
 from netops_agent import config  # noqa: F401  (importing it loads .env)
 
 # Read-only guard: only "show ..." and "info from state ..." commands are allowed.
-ALLOWED = re.compile(r"^(show|info from state)\s+[A-Za-z0-9_./ -]+$")
+ALLOWED = re.compile(r"^(show|info from state|info from running)\s+[A-Za-z0-9_./ -]+$")
 
 
 def container_for(hostname: str) -> str:

@@ -15,6 +15,7 @@ if "__interrupt__" in result:
     t = p["ticket"]
     print(f"\n--- TICKET {t['ticket_id']} ---")
     print(f"{t['title']}  |  device {t['hostname']}  |  {t['interface']}  |  severity {t['severity']}")
+    print(f"\n--- LIVE CHECK ---\n{p['live_check']}")
     print(f"\n--- RCA (runbook: {p['runbook_used']}) ---")
     print(f"Likely cause: {p['likely_cause']}")
     print("\n--- REMOTE STEPS (NOC) ---")
